@@ -1,0 +1,7 @@
+{
+  "name": "volume-tracker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
