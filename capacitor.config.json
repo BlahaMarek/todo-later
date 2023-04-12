@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "volume-tracker",
+	"appId": "com.iwesys.Todo",
+	"appName": "Todo later",
 	"webDir": "dist",
 	"bundledWebRuntime": false
 }
