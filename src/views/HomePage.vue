@@ -119,7 +119,7 @@ export default {
 
         }
       } catch (e) {
-        console.error(e)
+        this._log('UP pressed response', e.message)
       }
     },
 
