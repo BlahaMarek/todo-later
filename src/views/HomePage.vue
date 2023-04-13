@@ -4,7 +4,7 @@
       <ion-toolbar>
         <ion-title>Todo later</ion-title>
         <ion-buttons slot="end">
-          <ion-icon class="ion-margin-end" :icon="settingsOutline" @click="openBrowser"  @touchstart="mouseDown" @touchend="mouseUp"></ion-icon>
+          <ion-icon class="ion-margin-end" :icon="settingsOutline"  @touchstart="mouseDown" @touchend="mouseUp"></ion-icon>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
@@ -54,7 +54,7 @@ export default {
     this.logs = JSON.parse(localStorage.getItem('logs'))
     const data =
       {
-        date: moment().format('DD.MM.YYYY, h:mm:ss.SSSS'),
+        date: moment().format('DD.MM., h:mm:ss.SSS'),
         event: 'App opened',
         status: '-'
       }
@@ -68,7 +68,6 @@ export default {
 
   mounted() {
     this.textArea = localStorage.getItem('textArea')
-    this._log('Text saved')
     CapacitorVolumeButtons.addListener('volumeButtonPressed', this.onVolumeButtonPressed)
   },
 
@@ -77,19 +76,13 @@ export default {
       localStorage.setItem('textArea', this.textArea)
     },
 
-    mouseDown() {
+    async mouseDown() {
       console.log('DOWN')
+      clearTimeout(this.timer)
       this.timer = setTimeout(() => {
         this.$router.push('/logs')
       }, 2000)
-    },
 
-    mouseUp() {
-      console.log('up')
-      clearTimeout(this.timer)
-    },
-
-    async openBrowser() {
       if (this.timestamps.length < 4) {
         return this.timestamps.push(new Date())
       }
@@ -101,32 +94,38 @@ export default {
 
       if (difference < 2000) {
         this._log('Browser opened')
+        clearTimeout(this.timer)
         await Browser.open({ url: 'https://dev.iwesys.com/b_todo/' })
       }
+    },
+
+    mouseUp() {
+      console.log('up')
+      clearTimeout(this.timer)
     },
 
     async  onVolumeButtonPressed({direction} ) {
       try {
         if (direction === 'up') {
-          this._log('UP pressed')
+          this._log('UP')
           const data = await axios.post('https://dev.iwesys.com/b_todo/?type=1')
-          this._log('UP pressed response', data.statusText)
+          this._log(`UP - ${data.statusText}`)
 
         } else {
-          this._log('DOWN pressed')
+          this._log('DOWN')
           const data = await axios.post('https://dev.iwesys.com/b_todo/?type=2')
-          this._log('UP pressed response', data.statusText)
+          this._log(`DOWN - ${data.statusText}`)
 
         }
       } catch (e) {
-        this._log('UP pressed response', e.message)
+        this._log(`UP - ${e.message} `)
       }
     },
 
     _log(event, status = '-') {
       this.logs.unshift(
           {
-            date: moment().format('DD.MM.YYYY, h:mm:ss.SSSS'),
+            date: moment().format('DD.MM., h:mm:ss.SSS'),
             event: event,
             status: '-'
           })

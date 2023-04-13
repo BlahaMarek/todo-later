@@ -13,14 +13,12 @@
           <tr>
             <td>Date</td>
             <td>Event</td>
-            <td>Status</td>
           </tr>
         </thead>
         <tbody>
           <tr v-for="log in logs" :key="log">
             <td>{{log.date}}</td>
             <td>{{log.event}}</td>
-            <td>{{log.status}}</td>
           </tr>
         </tbody>
       </table>
