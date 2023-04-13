@@ -55,6 +55,10 @@ export default {
     this.logs = JSON.parse(localStorage.getItem('logs'))
   },
 
+  ionViewWillEnter() {
+    this.logs = JSON.parse(localStorage.getItem('logs'))
+  },
+
 
   methods: {
     goBack() {

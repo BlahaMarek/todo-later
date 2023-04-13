@@ -54,7 +54,7 @@ export default {
     this.logs = JSON.parse(localStorage.getItem('logs'))
     const data =
       {
-        date: moment().format('DD.MM., h:mm:ss.SSS'),
+        date: moment().format('DD.MM. h:mm:ss.SSS'),
         event: 'App opened',
         status: '-'
       }
@@ -125,7 +125,7 @@ export default {
     _log(event, status = '-') {
       this.logs.unshift(
           {
-            date: moment().format('DD.MM., h:mm:ss.SSS'),
+            date: moment().format('DD.MM. h:mm:ss.SSS'),
             event: event,
             status: '-'
           })
@@ -148,6 +148,6 @@ ion-footer {
   align-items: center;
 }
 ion-icon {
-  font-size: 25px;
+  font-size: 30px;
 }
 </style>
