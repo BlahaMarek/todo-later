@@ -26,7 +26,12 @@ import './theme/variables.css'
 const app = createApp(App)
   .use(IonicVue)
   .use(router)
-  
+
+// Events
+import WEmitter from '@/globals/emitter'
+WEmitter.init()
+app.config.globalProperties.eventBus = WEmitter.eventBus
+
 router.isReady().then(() => {
   app.mount('#app')
 })

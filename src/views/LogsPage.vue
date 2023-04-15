@@ -38,12 +38,11 @@
 
 <script lang="ts">
 import { IonContent, IonHeader, IonPage, IonToolbar, IonButton, IonFooter, IonTitle } from '@ionic/vue'
-import { settingsOutline } from 'ionicons/icons'
 
 export default {
   data() {
     return {
-      logs: []
+      logs: [],
     }
   },
 
@@ -53,6 +52,9 @@ export default {
 
   created() {
     this.logs = JSON.parse(localStorage.getItem('logs'))
+    this.eventBus.on('refresh', ({ logs }) => {
+      this.logs = logs
+    } )
   },
 
   ionViewWillEnter() {
